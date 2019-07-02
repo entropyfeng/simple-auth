@@ -30,7 +30,7 @@ public class SnowFlakeTest {
     @Test
     public void testSnowFlakeParam(){
        logger.info("dataCenterId {},machineId {}",AuthProperties.dataCenterId,AuthProperties.machineId);
-       SnowFlakeUtil snowFlakeUtil= SnowFlakeUtil.SnowFlakeUtilHolder.instance;
+       SnowFlakeUtil snowFlakeUtil= SnowFlakeUtil.getInstance();
        snowFlakeUtil.nextId();
     }
 
@@ -50,7 +50,7 @@ public class SnowFlakeTest {
                 Vector<Long> vector=new Vector<>();
                 Set<Long> set=new HashSet<Long>();
                 for(int j=0;j<1000*1000;j++){
-                    id= SnowFlakeUtil.SnowFlakeUtilHolder.instance.nextId();
+                    id= SnowFlakeUtil.getInstance().nextId();
                     vector.add(id);
                     set.add(id);
                 }

@@ -17,6 +17,9 @@ public class SnowFlakeUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(SnowFlakeUtil.class);
 
+    public static SnowFlakeUtil getInstance(){
+        return SnowFlakeUtilHolder.instance;
+    }
     public static  class SnowFlakeUtilHolder{
         public static SnowFlakeUtil instance=new SnowFlakeUtil(AuthProperties.dataCenterId,AuthProperties.machineId);
 
