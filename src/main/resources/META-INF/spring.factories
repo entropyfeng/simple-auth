@@ -1,2 +1,2 @@
 #auto config
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.github.entropyfeng.begauth.config.BegAuthAutoConfiguration
+thAutoConfigurationorg.springframework.boot.autoconfigure.EnableAutoConfiguration=com.github.entropyfeng.simpleauth.config.SimpleAu
