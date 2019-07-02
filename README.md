@@ -1,9 +1,8 @@
-[中文](https://github.com/entropyfeng/simple-auth/README.ZH.md) | [English](https://github.com/entropyfeng/simple-auth/README.md)
+[中文](https://github.com/entropyfeng/simple-auth/blob/master/README.ZH.md) | [English](https://github.com/entropyfeng/simple-auth/blob/master/README.md)
 # simple-auth
 a simple authenticate and authority framework based in SpringBoot Framework
 ### required
 * redis
-
 ### install and quick start
     git clone https://github.com/entropyfeng/simple-auth.git
     mvn install 
