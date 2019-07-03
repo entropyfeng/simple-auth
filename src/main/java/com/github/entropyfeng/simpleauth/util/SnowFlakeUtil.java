@@ -14,14 +14,14 @@ import org.springframework.core.annotation.AnnotationUtils;
 public class SnowFlakeUtil {
 
 
-
     private static final Logger logger = LoggerFactory.getLogger(SnowFlakeUtil.class);
 
-    public static SnowFlakeUtil getInstance(){
+    public static SnowFlakeUtil getInstance() {
         return SnowFlakeUtilHolder.instance;
     }
-    public static  class SnowFlakeUtilHolder{
-        public static SnowFlakeUtil instance=new SnowFlakeUtil(AuthProperties.dataCenterId,AuthProperties.machineId);
+
+    public static class SnowFlakeUtilHolder {
+        public static SnowFlakeUtil instance = new SnowFlakeUtil(AuthProperties.dataCenterId, AuthProperties.machineId);
 
     }
 
@@ -117,6 +117,7 @@ public class SnowFlakeUtil {
             //同一毫秒的序列数已经达到最大
             if (sequence == 0L) {
                 currStamp = tilNextMillis();
+                logger.info("snowFlakeId reach peek per millis");
             }
         } else {
             //不同毫秒内，序列号置为0

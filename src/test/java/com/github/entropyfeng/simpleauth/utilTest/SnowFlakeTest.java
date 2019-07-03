@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
@@ -24,7 +25,7 @@ public class SnowFlakeTest {
 
 
     private Vector<Long> resVector=new Vector<>();
-    private Set<Long> resSet=new HashSet<Long>();
+    private Set<Long> resSet= Collections.synchronizedSet(new HashSet<Long>());
     private static final Logger logger=LoggerFactory.getLogger(SnowFlakeTest.class);
 
     @Test
@@ -55,7 +56,8 @@ public class SnowFlakeTest {
                     set.add(id);
                 }
                 long end=System.currentTimeMillis();
-
+                resVector.addAll(vector);
+                resSet.addAll(set);
                 logger.info("thread {},sizeof vector {},size of set {}, and cost {},millis",pid,vector.size(),set.size(),end-begin);
                 countDownLatch.countDown();
             }).start();
@@ -63,6 +65,7 @@ public class SnowFlakeTest {
         try {
             countDownLatch.await();
 
+            logger.info("final sizeof vector {},size of set {}",resVector.size(),resSet.size());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
