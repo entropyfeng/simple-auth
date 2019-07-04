@@ -7,6 +7,8 @@ import com.github.entropyfeng.simpleauth.data.to.LoadRolesDTO;
 import com.github.entropyfeng.simpleauth.data.to.LoginDTO;
 import com.github.entropyfeng.simpleauth.event.LoadUserRolesEvent;
 import com.github.entropyfeng.simpleauth.event.LoginEvent;
+import com.github.entropyfeng.simpleauth.exception.AccountNotExistException;
+import com.github.entropyfeng.simpleauth.exception.PasswordErrorException;
 import com.github.entropyfeng.simpleauth.service.AuthService;
 import com.github.entropyfeng.simpleauth.util.JsonWebTokenUtil;
 import com.github.entropyfeng.simpleauth.util.SnowFlakeUtil;
@@ -47,7 +49,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public String login(Long userId, String password) {
+    public String login(Long userId, String password)throws PasswordErrorException,AccountNotExistException {
 
         LoginDTO loginDTO=new LoginDTO(userId,password);
         //发布一个登录事件
@@ -56,8 +58,13 @@ public class AuthServiceImpl implements AuthService {
             LoadRolesDTO loadRolesDTO=new LoadRolesDTO(userId);
             eventPublisher.publishEvent(new LoadUserRolesEvent(this,loadRolesDTO));
             return JsonWebTokenUtil.issueJWT(AuthProperties.jwtSecretKey,Long.toString(SnowFlakeUtil.getInstance().nextId()),Long.toString(userId),"server","web",60*60*24*7L, JSON.toJSONString(loadRolesDTO.getRoles()),"",SignatureAlgorithm.HS512);
+        //密码错误
+        }else if(LoginStatus.PASSWORD_ERROR.equals(loginDTO.getLoginStatus())){
+            throw new PasswordErrorException();
+        //账户不存在
+        }else if(LoginStatus.ACCOUNT_NOT_EXIST.equals(loginDTO.getLoginStatus())){
+            throw new AccountNotExistException();
         }
-
         return null;
     }
 }

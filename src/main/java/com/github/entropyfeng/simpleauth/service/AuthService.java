@@ -1,5 +1,8 @@
 package com.github.entropyfeng.simpleauth.service;
 
+import com.github.entropyfeng.simpleauth.exception.AccountNotExistException;
+import com.github.entropyfeng.simpleauth.exception.PasswordErrorException;
+
 import javax.validation.constraints.NotNull;
 import java.util.List;
 /**
@@ -15,5 +18,14 @@ public interface AuthService {
      */
     public boolean checkPerm(@NotNull List<String> roleList,@NotNull String perm);
 
-    public String login(Long userId,String password);
+
+    /**
+     * 登录，并签发jwt
+     * @param userId 用户id
+     * @param password 密码
+     * @return jwt string 若为null,则登录失败
+     * @throws PasswordErrorException 密码没有找到异常
+     * @throws AccountNotExistException 账户不存在异常
+     */
+    public String login(@NotNull Long userId,@NotNull String password)throws PasswordErrorException,AccountNotExistException;
 }
