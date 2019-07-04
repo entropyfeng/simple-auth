@@ -5,6 +5,8 @@ package com.github.entropyfeng.simpleauth.data.status;
  * @date 2019/7/3 22:37
  */
 public enum LoginStatus {
+    //默认拒绝
+    DEFAULT,
     //登录成功
     SUCCESS,
     //密码错误

@@ -16,7 +16,7 @@ public class SimpleAuthApplicationTests {
     @Test
     public void contextLoads() {
 
-        authService.login("d","d");
+        authService.login(145L,"d");
 
     }
 

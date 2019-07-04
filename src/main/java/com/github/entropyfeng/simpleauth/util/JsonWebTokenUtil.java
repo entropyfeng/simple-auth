@@ -64,9 +64,7 @@ public class JsonWebTokenUtil {
         // 加密设置
         jwtBuilder.signWith(algorithm,secretKeyBytes);
 
-        String jwt=jwtBuilder.compact();
-        System.out.println(jwt);
-        return jwt;
+        return jwtBuilder.compact();
     }
     /**
      * 验签JWT

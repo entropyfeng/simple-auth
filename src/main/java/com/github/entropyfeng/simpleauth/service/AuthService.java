@@ -15,5 +15,5 @@ public interface AuthService {
      */
     public boolean checkPerm(@NotNull List<String> roleList,@NotNull String perm);
 
-    public String login(String userId,String password);
+    public String login(Long userId,String password);
 }

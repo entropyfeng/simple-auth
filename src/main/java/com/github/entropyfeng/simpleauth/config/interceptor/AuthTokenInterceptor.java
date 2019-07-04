@@ -58,13 +58,10 @@ public class AuthTokenInterceptor implements HandlerInterceptor {
         if (handler instanceof HandlerMethod) {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             Annotation[] annotations = handlerMethod.getMethod().getAnnotations();
-
             //check whether this method is should be handler by  this interceptor
             boolean support = Arrays.stream(annotations).anyMatch(annotation -> SUPPORT_AUTH_ANNOTATION.contains(annotation.annotationType().getName()));
-
             if (support) {
                 String perm = getMethodPerm(handlerMethod);
-
                 res=checkAuth(perm,request,response);
             }
         }
