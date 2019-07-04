@@ -15,6 +15,7 @@ import com.github.entropyfeng.simpleauth.util.SnowFlakeUtil;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -25,10 +26,9 @@ import java.util.List;
  * @author entropyfeng
  * @date 2019/6/17 21:32
  */
-@Service
+
+@Service("authService")
 public class AuthServiceImpl implements AuthService {
-
-
 
     @Autowired
     public AuthServiceImpl(ApplicationEventPublisher eventPublisher, StringRedisTemplate redisTemplate) {

@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
  * @date 2019/6/11 15:41
  */
 @Configuration
-@ComponentScan("com.github.entropyfeng.simple-auth")
+@ComponentScan("com.github.entropyfeng.simpleauth")
 public class SimpleAuthAutoConfiguration {
 
     private final static Logger logger = LoggerFactory.getLogger(SimpleAuthAutoConfiguration.class);

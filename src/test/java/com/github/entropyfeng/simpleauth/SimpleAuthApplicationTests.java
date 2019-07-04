@@ -1,6 +1,7 @@
 package com.github.entropyfeng.simpleauth;
 
 import com.github.entropyfeng.simpleauth.service.AuthService;
+import com.github.entropyfeng.simpleauth.util.SpringUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,16 +12,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class SimpleAuthApplicationTests {
 
-    @Autowired
-    AuthService authService;
+
     @Test
     public void contextLoads() {
 
-        try {
-            authService.login(145L,"d");
-        }catch (Exception e){
-
-        }
+        AuthService authService= (AuthService) SpringUtil.getBean("authService");
+        authService.toString();
 
 
     }
