@@ -6,6 +6,10 @@ package com.github.entropyfeng.simpleauth.data;
  */
 public interface Realm {
 
+    /**
+     * 获取当前Realm 的名称
+     * @return 当前Realm 的名称
+     */
     String getName();
 
     boolean supports(AuthenticationToken token);

@@ -7,14 +7,21 @@ package com.github.entropyfeng.simpleauth.data;
 public class UsernamePasswordToken implements AuthenticationToken {
 
 
+    private String username;
+    private String password;
+
+    public UsernamePasswordToken(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     @Override
     public Object getPrincipal() {
-        return null;
+        return username;
     }
 
     @Override
     public Object getCredential() {
-        return null;
+        return password;
     }
 }

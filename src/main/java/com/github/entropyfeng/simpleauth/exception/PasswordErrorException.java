@@ -4,7 +4,7 @@ package com.github.entropyfeng.simpleauth.exception;
  * @author entropyfeng
  * @date 2019/7/4 11:39
  */
-public class PasswordErrorException extends Exception {
+public class PasswordErrorException extends CredentialErrorException {
     public PasswordErrorException() {
         super();
     }

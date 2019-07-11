@@ -28,4 +28,7 @@ public interface AuthService {
      * @throws AccountNotExistException 账户不存在异常
      */
     public String login(@NotNull Long userId,@NotNull String password)throws PasswordErrorException,AccountNotExistException;
+
+
+
 }
