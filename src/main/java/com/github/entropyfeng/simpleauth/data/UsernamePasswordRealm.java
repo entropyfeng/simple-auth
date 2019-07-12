@@ -8,6 +8,11 @@ import org.springframework.context.ApplicationEventPublisher;
  */
 public class UsernamePasswordRealm extends AbstractLoginRealm{
 
+    private UsernamePasswordInfo usernamePasswordInfo;
+
+    public UsernamePasswordRealm(Object source) {
+        super(source);
+    }
 
     @Override
     public String getName() {
@@ -17,6 +22,11 @@ public class UsernamePasswordRealm extends AbstractLoginRealm{
     @Override
     public boolean supports(AuthenticationToken token) {
         return token instanceof UsernamePasswordToken;
+    }
+
+    @Override
+    public AuthenticationInfo getAuthenticationInfo(AuthenticationToken token) {
+        return null;
     }
 
 }

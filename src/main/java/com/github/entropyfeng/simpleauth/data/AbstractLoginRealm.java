@@ -1,5 +1,6 @@
 package com.github.entropyfeng.simpleauth.data;
 
+import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
 
 /**
@@ -7,11 +8,15 @@ import org.springframework.context.ApplicationEventPublisher;
  * @date 2019/7/10 12:45
  */
 
-public abstract class AbstractLoginRealm implements Realm {
+public abstract class AbstractLoginRealm extends ApplicationEvent implements Realm {
 
-    private  ApplicationEventPublisher eventPublisher;
 
-    private AbstractLoginEvent abstractLoginEvent;
+
+
+
+    public AbstractLoginRealm(Object source) {
+        super(source);
+    }
 
 
     /**
@@ -32,20 +37,10 @@ public abstract class AbstractLoginRealm implements Realm {
 
 
 
-    public void setAbstractLoginEvent(AbstractLoginEvent abstractLoginEvent) {
-        this.abstractLoginEvent = abstractLoginEvent;
-    }
-
     @Override
-    public AuthenticationInfo getAuthenticationInfo(AuthenticationToken token) {
+    public abstract AuthenticationInfo getAuthenticationInfo(AuthenticationToken token);
 
-        abstractLoginEvent.setAuthenticationToken(token);
-        eventPublisher.publishEvent(abstractLoginEvent);
-        return abstractLoginEvent.getAuthenticationInfo();
-    }
 
-    public void setEventPublisher(ApplicationEventPublisher eventPublisher) {
-        this.eventPublisher = eventPublisher;
-    }
+
 
 }

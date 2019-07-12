@@ -12,7 +12,6 @@ public class UsernamePasswordEvent extends AbstractLoginEvent {
     public UsernamePasswordEvent(Object source, UsernamePasswordToken authenticationToken, UsernamePasswordInfo usernamePasswordInfo) {
         super(source, authenticationToken, usernamePasswordInfo);
 
-
     }
 
 }

@@ -19,12 +19,16 @@ public class LoginHelper {
 
     private Logger logger=LoggerFactory.getLogger(LoginHelper.class);
 
+    private HttpServletRequest request;
+
+    public LoginHelper(HttpServletRequest request){
+        this.request=request;
+    }
     /**
      * 检查当前主体是否登录
-     * @param request {@link HttpServletRequest}
      * @return false ->not login;true-> is login
      */
-    public boolean isLogin(HttpServletRequest request){
+    public boolean isLogin(){
        String authToken= HttpUtil.getAuthToken(request);
 
        String ip=HttpUtil.getIPAddress(request);
@@ -42,6 +46,11 @@ public class LoginHelper {
     }
     public boolean tryLogin(AuthenticationToken authenticationToken){
 
+        if(isLogin()){
+            return true;
+        }
+
+        authenticationToken.getPrincipal();
 
 
         return false;
