@@ -14,6 +14,6 @@ public interface Realm {
 
     boolean supports(AuthenticationToken token);
 
-    AuthenticationInfo getAuthenticationInfo(AuthenticationToken token);
+    AuthenticationInfo getAuthenticationInfo();
 
 }

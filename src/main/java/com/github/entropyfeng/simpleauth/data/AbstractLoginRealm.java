@@ -38,7 +38,7 @@ public abstract class AbstractLoginRealm extends ApplicationEvent implements Rea
 
 
     @Override
-    public abstract AuthenticationInfo getAuthenticationInfo(AuthenticationToken token);
+    public abstract AuthenticationInfo getAuthenticationInfo();
 
 
 

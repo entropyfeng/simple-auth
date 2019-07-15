@@ -10,8 +10,11 @@ public class UsernamePasswordRealm extends AbstractLoginRealm{
 
     private UsernamePasswordInfo usernamePasswordInfo;
 
-    public UsernamePasswordRealm(Object source) {
+    private UsernamePasswordToken usernamePasswordToken;
+
+    public UsernamePasswordRealm(Object source,UsernamePasswordToken usernamePasswordToken) {
         super(source);
+        this.usernamePasswordToken=usernamePasswordToken;
     }
 
     @Override
@@ -24,9 +27,18 @@ public class UsernamePasswordRealm extends AbstractLoginRealm{
         return token instanceof UsernamePasswordToken;
     }
 
-    @Override
-    public AuthenticationInfo getAuthenticationInfo(AuthenticationToken token) {
-        return null;
+
+    public UsernamePasswordToken getUsernamePasswordToken() {
+        return usernamePasswordToken;
     }
 
+    @Override
+    public AuthenticationInfo getAuthenticationInfo()
+    {
+        return usernamePasswordInfo;
+    }
+
+    public void setUsernamePasswordInfo(UsernamePasswordInfo usernamePasswordInfo) {
+        this.usernamePasswordInfo = usernamePasswordInfo;
+    }
 }
