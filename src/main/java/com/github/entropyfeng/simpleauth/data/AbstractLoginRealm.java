@@ -1,5 +1,6 @@
 package com.github.entropyfeng.simpleauth.data;
 
+import com.github.entropyfeng.simpleauth.core.CredentialsMatcher;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
 
@@ -12,12 +13,18 @@ public abstract class AbstractLoginRealm extends ApplicationEvent implements Rea
 
 
 
-
+    private CredentialsMatcher credentialsMatcher;
+    public void setCredentialsMatcher(CredentialsMatcher credentialsMatcher) {
+        this.credentialsMatcher = credentialsMatcher;
+    }
 
     public AbstractLoginRealm(Object source) {
         super(source);
     }
 
+    public CredentialsMatcher getCredentialsMatcher() {
+        return credentialsMatcher;
+    }
 
     /**
      * 获取当前Realm名称
@@ -39,6 +46,7 @@ public abstract class AbstractLoginRealm extends ApplicationEvent implements Rea
 
     @Override
     public abstract AuthenticationInfo getAuthenticationInfo();
+
 
 
 

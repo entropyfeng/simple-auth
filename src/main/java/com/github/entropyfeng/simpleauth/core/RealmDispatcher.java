@@ -2,6 +2,7 @@ package com.github.entropyfeng.simpleauth.core;
 
 import com.github.entropyfeng.simpleauth.config.RealmConfiguration;
 import com.github.entropyfeng.simpleauth.data.AbstractLoginRealm;
+import com.github.entropyfeng.simpleauth.data.AuthenticationInfo;
 import com.github.entropyfeng.simpleauth.data.AuthenticationToken;
 import com.github.entropyfeng.simpleauth.data.Realm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,8 @@ public class RealmDispatcher {
         for (AbstractLoginRealm realm: realmConfiguration.getLoginRealmCollection().getRealms()){
             if (realm.supports(authenticationToken)){
                 eventPublisher.publishEvent(realm);
-                
-                return true;
+               AuthenticationInfo authenticationInfo= realm.getAuthenticationInfo();
+               return realm.getCredentialsMatcher().doCredentialsMatch(authenticationToken,authenticationInfo) ;
             }
         }
         return false;

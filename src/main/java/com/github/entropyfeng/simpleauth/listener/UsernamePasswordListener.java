@@ -2,7 +2,6 @@ package com.github.entropyfeng.simpleauth.listener;
 
 import com.github.entropyfeng.simpleauth.data.UsernamePasswordInfo;
 import com.github.entropyfeng.simpleauth.data.UsernamePasswordRealm;
-import com.github.entropyfeng.simpleauth.data.status.LoginStatus;
 import com.github.entropyfeng.simpleauth.data.status.PrincipalStatus;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -19,7 +18,8 @@ public class UsernamePasswordListener {
     public void listener(UsernamePasswordRealm realm){
 
         String username= (String) realm.getUsernamePasswordToken().getPrincipal();
-        realm.setUsernamePasswordInfo(new UsernamePasswordInfo("123","456",PrincipalStatus.SUCCESS);
+        realm.setUsernamePasswordInfo(new UsernamePasswordInfo("123","456",PrincipalStatus.SUCCESS));
+
     }
 
 }
