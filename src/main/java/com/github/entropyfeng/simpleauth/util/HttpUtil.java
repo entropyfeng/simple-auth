@@ -37,7 +37,7 @@ public class HttpUtil {
 
       String authToken= (String)request.getAttribute(authTokenName );
       if(StringUtils.isEmpty(authToken)){
-          authToken=(String)request.getParameter(authTokenName );
+          authToken=(String)request.getParameter(authTokenName);
       }else {
           return authToken;
       }

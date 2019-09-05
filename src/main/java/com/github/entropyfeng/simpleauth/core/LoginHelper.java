@@ -7,6 +7,8 @@ import com.github.entropyfeng.simpleauth.util.JsonWebTokenUtil;
 import com.github.entropyfeng.simpleauth.util.SpringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,20 +17,25 @@ import javax.servlet.http.HttpServletRequest;
  * @author entropyfeng
  * @date 2019/7/11 21:48
  */
+@Component
 public class LoginHelper {
+
+
+
+    private final RealmDispatcher realmDispatcher;
 
     private Logger logger=LoggerFactory.getLogger(LoginHelper.class);
 
-    private HttpServletRequest request;
 
-    public LoginHelper(HttpServletRequest request){
-        this.request=request;
+    @Autowired
+    public LoginHelper(RealmDispatcher realmDispatcher){
+        this.realmDispatcher = realmDispatcher;
     }
     /**
      * 检查当前主体是否登录
      * @return false ->not login;true-> is login
      */
-    public boolean isLogin(){
+    public boolean isLogin(HttpServletRequest request){
        String authToken= HttpUtil.getAuthToken(request);
 
        String ip=HttpUtil.getIPAddress(request);
@@ -46,14 +53,8 @@ public class LoginHelper {
     }
     public boolean tryLogin(AuthenticationToken authenticationToken){
 
-        if(isLogin()){
-            return true;
-        }
+       return realmDispatcher.dispatcher(authenticationToken);
 
-        authenticationToken.getPrincipal();
-
-
-        return false;
     }
 
     public boolean tryLogout(){
