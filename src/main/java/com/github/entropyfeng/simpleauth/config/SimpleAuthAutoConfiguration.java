@@ -6,6 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * the module init part
  * @author entropyfeng
  * @date 2019/6/11 15:41
  */
