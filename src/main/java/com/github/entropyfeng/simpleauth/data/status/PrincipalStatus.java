@@ -9,8 +9,8 @@ public enum PrincipalStatus {
     REJECT,
     //登录成功
     SUCCESS,
-    //密码错误
-    Credential_ERROR,
+    //Principal与Credential 不匹配
+    PRINCIPAL_CREDENTIAL_NOT_CORRESPOND,
     //账户被禁用
     PRINCIPAL_DISABLE,
     //账户不存在

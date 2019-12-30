@@ -21,7 +21,7 @@ public class LoginDTO {
 
         this.password=password;
         this.userId=userId;
-        loginStatus=LoginStatus.DEFAULT;
+        loginStatus=LoginStatus.REJECT;
     }
 
     public Long getUserId() {

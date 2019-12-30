@@ -17,6 +17,6 @@ public class SimpleAuthAutoConfiguration {
     private final static Logger logger = LoggerFactory.getLogger(SimpleAuthAutoConfiguration.class);
 
     static {
-        logger.info("add simple-auth module into application");
+        logger.info("add simple-auth module into application .");
     }
 }

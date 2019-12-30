@@ -68,11 +68,10 @@ public class SpringUtil implements ApplicationContextAware {
 
     /**
      * 动态注册bean
-     *
+     * the bean registered to springContext
      * @param clazz a class
      * @param beanName bean name
      * @param <T> bean
-     * @return  the bean registered to springContext
      */
    public  static  <T> void registerBean(Class<T> clazz, String beanName,Object... args) {
         if (!applicationContext.containsBean(beanName)) {

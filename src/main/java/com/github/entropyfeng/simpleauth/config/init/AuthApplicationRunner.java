@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * 应用启动时发布一个加载 所有角色及所属权限到 redis 的事件
+ * 用户应监听此事件，然后从数据库中导入相关信息.
  * @author entropyfeng
  */
 @Component

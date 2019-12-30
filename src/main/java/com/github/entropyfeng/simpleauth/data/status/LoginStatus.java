@@ -6,7 +6,7 @@ package com.github.entropyfeng.simpleauth.data.status;
  */
 public enum LoginStatus {
     //默认拒绝
-    DEFAULT,
+    REJECT,
     //登录成功
     SUCCESS,
     //密码错误
