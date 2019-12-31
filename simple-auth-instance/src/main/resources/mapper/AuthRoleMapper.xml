@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.entropyfeng.simpleauthinstance.dao.AuthRoleMapper">
+  <resultMap id="BaseResultMap" type="com.github.entropyfeng.simpleauthinstance.domain.bo.AuthRole">
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+    <result column="description" jdbcType="VARCHAR" property="description"/>
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+  <sql id="base_column_list">
+  role_id,role_name,status,description,create_time,update_time
+  </sql>
+  <select id="selectAllRoles" resultMap="BaseResultMap">
+    select <include refid="base_column_list"/> from auth_role;
+  </select>
+
+  <resultMap id="rolesAndItsResources" type="com.github.entropyfeng.simpleauthinstance.domain.vo.RolesAndItsResources">
+    <result property="roleName" column="role_name"/>
+    <result property="resourceMethod" column="resource_method"/>
+    <result property="resourceContent" column="resource_content"/>
+  </resultMap>
+
+  <select id="selectAllRolesAndItsResources" resultMap="rolesAndItsResources">
+    select  auth_role.role_name,auth_resource.resource_method,auth_resource.resource_content from auth_role,auth_role_resource,auth_resource where auth_role.role_id=auth_role_resource.role_id and auth_role_resource.resource_id=auth_resource.resource_id
+  </select>
+</mapper>

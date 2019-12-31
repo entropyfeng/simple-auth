@@ -1,0 +1,1 @@
+select * from (auth_user inner join auth_user_role on auth_user.user_id=auth_user_role.user_id )inner join auth_role on auth_role.role_id=auth_user_role.role_id
