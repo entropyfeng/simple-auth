@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONException;
 import com.github.entropyfeng.myauth.config.AuthProperties;
 import com.github.entropyfeng.myauth.config.anno.*;
 import com.github.entropyfeng.myauth.data.vo.Message;
+import com.github.entropyfeng.myauth.service.AuthService;
 import com.github.entropyfeng.myauth.util.HttpUtil;
 import com.github.entropyfeng.myauth.util.JsonWebTokenUtil;
 import com.github.entropyfeng.myauth.util.JwtAccount;
@@ -36,7 +37,7 @@ public class AuthTokenInterceptor implements HandlerInterceptor {
 
 
     @Autowired
-    AuthService authService;
+   private  AuthService authService;
 
 
     @Override
@@ -55,6 +56,12 @@ public class AuthTokenInterceptor implements HandlerInterceptor {
         return res;
     }
 
+    /**
+     * 找到该 handler所需要的权限
+     * @param handlerMethod {@link HandlerMethod}
+     * @return null->不是所要拦截的行为
+     *         String->该方法所需要的权限信息
+     */
     private String handleMethod(HandlerMethod handlerMethod) {
 
         Annotation[] annotations = handlerMethod.getMethod().getAnnotations();
@@ -97,35 +104,46 @@ public class AuthTokenInterceptor implements HandlerInterceptor {
             try {
                 roleList = JSON.parseArray(jwtAccount.getRoles(), String.class);
             } catch (JSONException e) {
-                logger.info("parse roleList error");
+                logger.info("token {} parse roleList error",jwtAccount.getTokenId());
             }
 
             if (roleList != null) {
                 if (!authService.checkPerm(roleList, perm)) {
                     Message message = new Message();
                     message.setSuccess(false);
-                    message.setMsg("auth error");
+                    message.setMsg("don't have the privilege");
                     HttpUtil.writeJsonResponse(response, JSON.toJSONString(message));
                 } else {
                     res = true;
                 }
+            }else {
+                Message message=new Message();
+                message.setSuccess(false);
+                message.setMsg("illegal token !");
             }
-
         }
         return res;
     }
 
+    /**
+     * 解析Request中的token ,若合法则返回代表该token的对象
+     * 若非法则返回空，并向客户发送错误信息
+     * @param request {@link HttpServletRequest}
+     * @param response {@link HttpServletResponse}
+     * @return {@link JwtAccount}
+     */
     private JwtAccount parseRequest(HttpServletRequest request, HttpServletResponse response) {
 
-        String authToken = (String) request.getAttribute(AuthProperties.authTokenName);
+        String authToken = (String) request.getAttribute(AuthProperties.AUTH_TOKEN_NAME);
         if (StringUtils.isEmpty(authToken)) {
-            authToken = request.getParameter(AuthProperties.authTokenName);
+            authToken = request.getParameter(AuthProperties.AUTH_TOKEN_NAME);
         }
         Message message = new Message();
         JwtAccount jwtAccount = null;
+        //检查request中是否携带token
         if (!StringUtils.isEmpty(authToken)) {
             try {
-                jwtAccount = JsonWebTokenUtil.parseJwt(authToken, AuthProperties.jwtSecretKey);
+                jwtAccount = JsonWebTokenUtil.parseJwt(authToken, AuthProperties.JWT_SECRET_KEY);
             } catch (ExpiredJwtException e) {
                 logger.info("token {} expired", authToken, e.getMessage());
                 message.setSuccess(false);
@@ -143,8 +161,10 @@ public class AuthTokenInterceptor implements HandlerInterceptor {
             }
 
         } else {
+            //request 中没有携带token
+
             message.setSuccess(false);
-            message.setMsg("required " + AuthProperties.authTokenName);
+            message.setMsg("required " + AuthProperties.AUTH_TOKEN_NAME);
 
         }
 
