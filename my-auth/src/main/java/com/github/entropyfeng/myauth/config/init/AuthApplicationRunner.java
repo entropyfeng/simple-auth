@@ -20,7 +20,7 @@ public class AuthApplicationRunner implements ApplicationRunner {
 
     private Logger logger =LoggerFactory.getLogger(AuthApplicationRunner.class);
 
-    final ApplicationEventPublisher eventPublisher;
+   private final ApplicationEventPublisher eventPublisher;
 
     @Autowired
     public AuthApplicationRunner(ApplicationEventPublisher eventPublisher) {
