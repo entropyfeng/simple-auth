@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.github.entropyfeng</groupId>
-    <artifactId>my-auth</artifactId>
+    <artifactId>simple-auth</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>my-auth</name>
+    <name>simple-auth</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -64,13 +64,6 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+
 
 </project>

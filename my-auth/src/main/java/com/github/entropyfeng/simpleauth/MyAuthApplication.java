@@ -1,18 +1,16 @@
-package com.github.entropyfeng.simpleauthinstance;
+package com.github.entropyfeng.simpleauth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author entropyfeng
- * @date 2019.1.1
  */
 @SpringBootApplication
-public class SimpleAuthInstanceApplication {
+public class MyAuthApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SimpleAuthInstanceApplication.class, args);
-
+        SpringApplication.run(MyAuthApplication.class, args);
     }
 
 }

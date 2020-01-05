@@ -26,6 +26,13 @@ public class AuthUser {
 
     private Date updateTime;
 
+    //-----------------constructor-------------
+
+    public AuthUser (String username ,String password){
+        this.username=username;
+        this.password=password;
+    }
+
 
     //-----------------get and set--------------
 
