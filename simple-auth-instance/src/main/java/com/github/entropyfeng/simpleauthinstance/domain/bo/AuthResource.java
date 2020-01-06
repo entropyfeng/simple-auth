@@ -23,6 +23,12 @@ public class AuthResource {
 
     private Date updateTime;
 
+    //-------------------constructor----------------------------
+
+    public AuthResource(){
+
+    }
+
     //---------------get and set-------------
 
     public int getResourceId() {

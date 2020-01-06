@@ -18,7 +18,6 @@ public final class JsonWebTokenUtil {
 
 
     /**
-     *
      * @param id 令牌ID
      * @param subject 用户ID
      * @param issuer 签发人

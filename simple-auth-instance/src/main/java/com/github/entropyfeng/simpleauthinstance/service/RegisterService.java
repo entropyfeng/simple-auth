@@ -18,4 +18,29 @@ public interface RegisterService {
     public boolean registerByUsernamePassword(@NotNull String username, @NotNull String password);
 
 
+    /**
+     * 查询数据库是否存在相同username
+     * @param username 用户名
+     * @return true->没有相同参数
+     *         false->存在相同参数
+     */
+    public boolean checkDuplicateUsername(@NotNull String username);
+
+
+    /**
+     * 查询数据库是否存在相同phone
+     * @param phone 电话
+     * @return true->没有相同参数
+     *         false->存在相同参数
+     */
+    public boolean checkDuplicatePhone(@NotNull String phone);
+
+    /**
+     * 查询数据库是否存在相同email
+     * @param email 邮箱
+     * @return true->没有相同参数
+     *         false->存在相同参数
+     */
+    public boolean checkDuplicateEmail(@NotNull String email);
+
 }

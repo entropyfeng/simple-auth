@@ -1,9 +1,11 @@
 package com.github.entropyfeng.simpleauthinstance.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.github.entropyfeng.simpleauth.data.vo.Message;
 import com.github.entropyfeng.simpleauthinstance.service.RegisterService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author entropyfeng
@@ -22,12 +24,47 @@ public class RegisterController {
      * @param password 密码
      * @return {@link com.github.entropyfeng.simpleauth.data.vo.Message}
      */
-    @RequestMapping("/register/up")
-    public String registerByUsernamePassword(String username,String password){
-
+    @PostMapping("/register/up")
+    public String registerByUsernamePassword(@RequestParam("username") String username,@Param("password") String password){
 
 
         return null;
+    }
 
+    @GetMapping("/register/checkUsername")
+    public String checkUsername(@RequestParam("username")String username){
+
+
+        Message message=new Message();
+        if(registerService.checkDuplicateUsername(username)){
+            message.setSuccess(true);
+        }else {
+            message.setSuccess(false);
+        }
+        return JSON.toJSONString(message);
+
+    }
+
+    @GetMapping("/register/checkPhone")
+    public String checkPhone(@RequestParam("phone")String phone){
+
+        Message message=new Message();
+        if(registerService.checkDuplicatePhone(phone)){
+            message.setSuccess(true);
+        }else {
+            message.setSuccess(false);
+        }
+        return JSON.toJSONString(message);
+    }
+    @GetMapping("/register/checkEmail")
+    public String checkEmail(@RequestParam("email")String email){
+
+        Message message=new Message();
+        if(registerService.checkDuplicateEmail(email)){
+            message.setSuccess(true);
+        }else {
+            message.setSuccess(false);
+        }
+        return JSON.toJSONString(message);
     }
 }

@@ -1,5 +1,6 @@
 package com.github.entropyfeng.simpleauthinstance.domain.bo;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -32,9 +33,22 @@ public class AuthUser {
         this.username=username;
         this.password=password;
     }
+    public AuthUser(int userId, String username, String password, int status, String description, String email, String phone,Date createTime, Date updateTime) {
+        this.userId = userId;
+        this.username = username;
+        this.password = password;
+        this.phone = phone;
+        this.email = email;
+        this.status = status;
+        this.description = description;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
+    public AuthUser(){
 
+    }
 
-    //-----------------get and set--------------
+//-----------------get and set--------------
 
     public int getUserId() {
         return userId;

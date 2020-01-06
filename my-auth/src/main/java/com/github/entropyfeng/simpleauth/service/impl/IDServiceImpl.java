@@ -3,6 +3,7 @@ package com.github.entropyfeng.simpleauth.service.impl;
 import com.github.entropyfeng.simpleauth.config.AuthProperties;
 import com.github.entropyfeng.simpleauth.service.IDService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.support.atomic.RedisAtomicInteger;
 import org.springframework.stereotype.Service;
@@ -23,13 +24,15 @@ public class IDServiceImpl implements IDService {
     private final RedisAtomicInteger redisResourceIdAtomicInteger;
 
     @Autowired
-    public IDServiceImpl(StringRedisTemplate redisTemplate) {
+    public IDServiceImpl(RedisTemplate redisTemplate) {
 
         redisUserIdAtomicInteger=new RedisAtomicInteger(AuthProperties.GLOBAL_USER_ID_NAME,redisTemplate.getConnectionFactory());
 
         redisRoleIdAtomicInteger=new RedisAtomicInteger(AuthProperties.GLOBAL_ROLE_ID_NAME,redisTemplate.getConnectionFactory());
 
         redisResourceIdAtomicInteger=new RedisAtomicInteger(AuthProperties.GLOBAL_RESOURCE_ID_NAME,redisTemplate.getConnectionFactory());
+
+
     }
 
     @Override

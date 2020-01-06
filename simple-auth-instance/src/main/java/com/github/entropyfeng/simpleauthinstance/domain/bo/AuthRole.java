@@ -14,6 +14,11 @@ public class AuthRole {
     private Date createTime;
     private  Date  updateTime;
 
+    //-------------------constructor----------------------------
+
+    public AuthRole(){
+
+    }
 
    //--------------------get and set----------------------------
 

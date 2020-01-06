@@ -2,8 +2,56 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.github.entropyfeng.simpleauthinstance.dao.AuthUserMapper">
 
-  <select id="selectPasswordByUsername" parameterType="String" resultType="String">
+  <resultMap id="BaseResultMap" type="com.github.entropyfeng.simpleauthinstance.domain.bo.AuthUser">
+    <id column="user_id" property="userId"/>
+    <result column="username" property="username"/>
+    <result column="password" property="password"/>
+    <result column="status" property="status"/>
+    <result column="description" property="description"/>
+    <result column="email" property="email"/>
+    <result column="phone" property="phone"/>
+    <result column="create_time" property="createTime" />
+    <result column="update_time" property="updateTime" />
+  </resultMap>
+  <sql id="baseSql">
+    user_id,user_name,password,status,description,email,phone,create_time,update_time
+  </sql>
+  <select id="selectPasswordByUsername" parameterType="String" resultType="java.lang.String">
     select password from auth_user where user_name=#{username}
   </select>
 
+  <select id="selectAuthUserByUserId" parameterType="int" resultMap="BaseResultMap">
+    select <include refid="baseSql"/>
+    from auth_user where user_id=#{userId}
+  </select>
+
+  <select id="selectAuthUserByUsername" parameterType="String" resultMap="BaseResultMap">
+    select <include refid="baseSql"/> from auth_user where user_name#{username}
+  </select>
+
+
+  <insert id="insertAuthUser" parameterType="com.github.entropyfeng.simpleauthinstance.domain.bo.AuthUser" >
+    insert into auth_user(user_id, user_name, password, status, description, email, phone)
+    VALUES (#{authUser.userId},#{authUser.username},#{authUser.password},#{authUser.status},#{authUser.description},#{authUser.email},#{authUser.phone})
+  </insert>
+
+
+  <update id="updatePasswordByUserId">
+    update auth_user set password= #{password} where user_id=#{userId}
+  </update>
+  <select id="selectCountUsername" parameterType="String" resultType="java.lang.Integer">
+    select count(*) from auth_user where user_name=#{username}
+  </select>
+
+  <select id="selectCountPhone" parameterType="String" resultType="java.lang.Integer">
+    select count(*) from auth_user where phone=#{phone}
+  </select>
+
+  <select id="selectCountEmail" parameterType="String" resultType="java.lang.Integer">
+    select count(*) from auth_user where email=#{email}
+  </select>
+
+  <select id="selectRolesByUid" parameterType="int" resultType="java.lang.String">
+    select role_name from auth_role,auth_user_role where auth_user_role.user_id=#{userId} and auth_user_role.role_id=auth_role.role_id
+  </select>
 </mapper>
