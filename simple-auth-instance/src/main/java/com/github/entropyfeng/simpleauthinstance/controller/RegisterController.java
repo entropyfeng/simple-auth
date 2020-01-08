@@ -26,13 +26,15 @@ public class RegisterController {
      */
     @PostMapping("/register/up")
     public String registerByUsernamePassword(@RequestParam("username") String username,@Param("password") String password){
-
-
+        registerService.registerByUsernamePassword(username, password);
         return null;
     }
 
+
+
     @GetMapping("/register/checkUsername")
     public String checkUsername(@RequestParam("username")String username){
+
 
 
         Message message=new Message();
