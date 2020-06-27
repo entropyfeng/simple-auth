@@ -10,12 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
-import sun.misc.BASE64Encoder;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -61,8 +62,8 @@ public class KaptchaServiceImpl implements KaptchaService {
 
         try {
             ImageIO.write(image, "jpg", outputStream);
-            BASE64Encoder encoder = new BASE64Encoder();
-            res.put("img", encoder.encode(outputStream.toByteArray()));
+
+            res.put("img", Arrays.toString(Base64.getEncoder().encode(outputStream.toByteArray())));
             String kaptchaToken = CommonUtil.getKaptchaToken();
             res.put("kaptcha_token", kaptchaToken);
             //设置过期时间300秒，并加入redis

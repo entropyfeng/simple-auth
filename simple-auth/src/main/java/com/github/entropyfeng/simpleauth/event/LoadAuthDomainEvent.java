@@ -11,7 +11,6 @@ public class LoadAuthDomainEvent extends ApplicationEvent {
     public LoadAuthDomainEvent(Object source) {
         super(source);
 
-
     }
     
 }
